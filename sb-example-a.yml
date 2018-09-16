@@ -1,0 +1,7 @@
+- hosts: localhost
+  gather_facts: False
+  roles:
+  - role: sb-provision_infra
+    tags: provision_infra
+  - role: sb-deploy_vm
+    tags: deploy_vm

@@ -1,0 +1,5 @@
+- hosts: [sb]
+  gather_facts: False
+  roles:
+  - role: sb-docker_app
+    tags: docker_app

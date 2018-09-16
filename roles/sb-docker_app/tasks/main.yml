@@ -1,0 +1,47 @@
+---
+# Possible future improvement: push configuration file to a submodule and retrieve them from the remote hosts
+- name: Clone repo to localhost
+  local_action:
+    module: git
+    repo: "{{ git_repo }}" 
+    dest: "{{ temp_repo_path }}"
+  run_once: true
+
+- name: Copy dockerfiles to remote hosts
+  synchronize:
+    src: "{{ temp_repo_path }}{{ dockerfile_path }}"
+    dest:  "{{ temp_repo_path }}" 
+
+- name: Create network
+  docker_network:
+    name: "{{ network_name }}"
+    ipam_options:
+      subnet: "{{ subnet_class }}"
+
+# Possible future improvement: push the images to a private repo and retrieve it from the remote host
+- name: Build images from dockerfile
+  docker_image:
+    name: "{{ item.value.image }}"
+    path:  "{{ temp_repo_path }}" 
+    dockerfile: "{{ item.value.dockerfile_name }}"
+    state: present
+  with_dict: "{{ containers }}"
+
+# working_dir and env_file added for future use
+- name: Start all containers
+  docker_container:
+    name: "{{ item.key }}"
+    image: "{{ item.value.image }}:{{ item.value.tag }}"
+    working_dir: "{{ item.value.working_dir|default(omit) }}"
+    env_file: "{{ item.value.env_file_name|default(omit) }}"
+    exposed_ports: "{{ item.value.exposed_ports|default(omit) }}"
+    published_ports: "{{ item.value.published_ports|default(omit) }}"
+    command: "{{ item.value.command }}"
+    state: started
+    restart_policy: on-failure
+    networks:
+      - name: "{{ network_name }}"
+        ipv4_address: "{{ item.value.ipv4 }}"
+        aliases:
+          - "{{ item.key }}"
+  with_dict: "{{ containers }}"

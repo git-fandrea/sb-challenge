@@ -1,0 +1,8 @@
+FROM php:latest
+
+ENV app_name=welcome
+
+RUN test -n "${app_name}"
+RUN mkdir /opt/${app_name} 
+
+COPY index.php /opt/${app_name}
