@@ -1,0 +1,12 @@
+{
+  "DBInstanceIdentifier": "{{ rds_reader_instance_name }}",
+  "SourceDBInstanceIdentifier": "{{ rds_writer_instance_name }}",
+  "DBInstanceClass": "{{ rds_instance_type }}",
+  "AvailabilityZone": "{{ aws_reader_zone }}",
+  "DBSubnetGroupName": "{{rds_instance_subnet_group }}",
+  "PreferredMaintenanceWindow": "{{ rds_cluster_maint_window | default(omit) }}",
+  "MultiAZ": false,
+  "AutoMinorVersionUpgrade": "{{ rds_version_upgrade }}",
+  "PubliclyAccessible": "{{ rds_publicly_accessible }},
+  "Tags": "{{ rds_reader_instance_tags }}",
+}

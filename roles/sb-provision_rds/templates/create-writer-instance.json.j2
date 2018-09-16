@@ -1,0 +1,18 @@
+{
+  "DBInstanceIdentifier": "{{ rds_writer_instance_name }}",
+  "DBInstanceClass": "{{ rds_instance_type }}",
+  "DBParameterGroupName": "{{ rds_parameters_group }}",
+  "DBClusterIdentifier": "{{ aurora_cluster_name }}",
+  "Engine": "{{ aurora_cluster_engine }}",
+  "DBName": "{{ db_name | default(omit) }}",
+  "AvailabilityZone": "{{ aws_writer_zone }}",
+  "DBParameterGroupName": "{{ rds_parameters_group }}",
+  "DBSubnetGroupName": "{{ aurora_cluster_name }}-subnets",
+  "PreferredMaintenanceWindow": "{{ rds_cluster_maint_window | default(omit) }}",
+  "MultiAZ": false,
+  "AutoMinorVersionUpgrade": "{{ rds_version_upgrade }}",
+  "LicenseModel": "general-public-license",
+  "PubliclyAccessible": "{{ rds_publicly_accessible }},
+  "Tags": "{{ rds_writer_instance_tags }}",
+  "PromotionTier": {{ aurora_promotion_tier | default('1') }}
+}

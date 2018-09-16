@@ -1,0 +1,20 @@
+{
+  "AvailabilityZones": [
+    "{{ aurora_cluster_availability_zones | join('", "') }}"
+  ],
+  "BackupRetentionPeriod": "{{ aurora_cluster_backup_retention }}",
+  "PreferredBackupWindow": "{{ aurora_cluster_backup_window }}",
+  "DBClusterIdentifier": "{{ aurora_cluster_name }}",
+  "DBClusterParameterGroupName": "{{ aurora_cluster_parameters_group }}",
+  "VpcSecurityGroupIds": [
+    "{{ aurora_cluster_security_group | join('", "') }}"
+  ],
+  "DBSubnetGroupName": "{{ aurora_cluster_subnet_group }}",
+  "Engine": "{{ aurora_cluster_engine }}",
+  "EngineVersion": "{{ aurora_cluster_engine_version }}",
+  "Port": {{ aurora_cluster_port }},
+  "MasterUsername": "{{ aurora_cluster_username }}",
+  "MasterUserPassword": "{{ aurora_cluster_password }}",
+  "Tags": "{{ aurora_cluster_tags }}",
+  "StorageEncrypted": "{{ aurora_cluster_encryption }}"
+}
