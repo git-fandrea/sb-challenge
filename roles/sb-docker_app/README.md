@@ -18,6 +18,7 @@ See default/main.yml for example. Ansible use a dict file for providing variable
         image: "anapsix/alpine-java"
         tag: "latest"
         dockerfile_name: "dockerfile_name_1"
+        working_dir: "path_to_my_dir"
         exposed_ports: "8080"
         # published_ports:
         ipv4: x.x.x.x
