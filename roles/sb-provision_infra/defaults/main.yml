@@ -1,0 +1,10 @@
+---
+keypair_name: sb-key
+instance_type: t2.micro
+security_group_VM: sb-sg-vm
+security_group_ELB: sb-sg-elb
+security_group_VPC: default
+ami_image: ami-0bdb1d6c15a40392c
+ec2_count: 2
+elb_name: sb-elb
+aws_region: eu-west-1
