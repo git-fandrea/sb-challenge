@@ -13,6 +13,8 @@ This role is just and exercise. It builds docker images with a simple web app wi
 
 See default/main.yml for example. Ansible use a dict file for providing variables for all the containters. Ansible will fail if "*_ports" variables are empty so leave them commented if you do not want to use it (see tasks for details).
 
+
+```yaml
     containers:
       "my-docker-container-name-1":
         image: "anapsix/alpine-java"
@@ -31,6 +33,7 @@ See default/main.yml for example. Ansible use a dict file for providing variable
     git_repo: "my_repo_on_github"
     dockerfile_path: "./roles/{{role_name}}/files/"
     temp_repo_path: "/tmp/sb/"
+```
 
 Insert path of your dockerfile and a path for cloning repository on remote hosts
 
