@@ -1,0 +1,31 @@
+---
+# Keep published/exposed_ports and workign_dir commented if don't wat to use it
+containers:
+  "sb-docker-app":
+    image: "php"
+    tag: "latest"
+    dockerfile_name: "dockerfile_app"
+    working_dir: "/opt/welcome"
+    exposed_ports: "8080"
+    # published_ports:
+    command: " php -S 0.0.0.0:8080"
+    ipv4: 172.16.10.10
+
+  "sb-docker-proxy":
+    image: "nginx"
+    tag: "latest"
+    dockerfile_name: "dockerfile_nginx"
+    #exposed_ports:
+    published_ports: "80:80"
+    command: ""
+    ipv4: 172.16.10.11
+
+
+# Network section
+network_name: "SB-Net"
+subnet_class: "172.16.10.0/28"
+
+# general vars
+git_repo: "https://github.com/git-fandrea/sb-challenge.git"
+dockerfile_path: "./roles/{{role_name}}/files/"
+temp_repo_path: "/tmp/sb/"
